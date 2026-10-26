@@ -11,16 +11,15 @@ CatalogFile = cs35l41.cat
 DriverVer   = 01/01/2023,1.0.0.1
 PnpLockdown = 1
 
-[DestinationDirs]
-DefaultDestDir = 12
-
-; ================= Class section =====================
-
 [SourceDisksNames]
 1 = %DiskName%,,,""
 
 [SourceDisksFiles]
 cs35l41.sys  = 1,,
+
+;13 == Windows\System32\DriverStore
+[DestinationDirs]
+DefaultDestDir = 13
 
 ;*****************************************
 ; cs35l41 Install Section
@@ -32,9 +31,6 @@ cs35l41.sys  = 1,,
 ; Decorated model section take precedence over undecorated 
 ; ones on XP and later.
 [Standard.NT$ARCH$]
-; Xiaomi Pad 5
-%cs35l41.DeviceDesc% = cs35l41_Device, ACPI\10133541
-; Xiaomi 9
 %cs35l41.DeviceDesc% = cs35l41_Device, ACPI\CS35L41
 
 [cs35l41_Device.NT]
@@ -50,15 +46,20 @@ AddService = cs35l41,%SPSVCINST_ASSOCSERVICE%, cs35l41_Service_Inst
 ; -------------- cs35l41 driver install sections
 [cs35l41_Service_Inst]
 DisplayName    = %cs35l41.SVCDESC%
-ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
-StartType      = 3               ; SERVICE_DEMAND_START 
-ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
-ServiceBinary  = %12%\cs35l41.sys
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %13%\cs35l41.sys
 LoadOrderGroup = Base
 
 [Strings]
-SPSVCINST_ASSOCSERVICE= 0x00000002
 ManufacturerName   = "map220v"
 DiskName           = "CS35L41 Installation Disk"
-cs35l41.DeviceDesc = "Cirrus Logic CS35L41 Codec" ; Cirrus Logic CS35L41 I2S Amplifier
+cs35l41.DeviceDesc = "Cirrus Logic CS35L41 Codec"
 cs35l41.SVCDESC    = "CS35L41 Service"
+
+;Non-Localizable Strings
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_DEMAND_START   = 3
+SERVICE_ERROR_NORMAL   = 1
