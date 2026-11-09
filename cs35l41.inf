@@ -26,11 +26,10 @@ DefaultDestDir = 13
 ;*****************************************
 
 [Manufacturer]
-%ManufacturerName%=Standard,NT$ARCH$
+%ManufacturerName% = CS35L41, NTARM64.10.0...16299
 
-; Decorated model section take precedence over undecorated 
-; ones on XP and later.
-[Standard.NT$ARCH$]
+
+[CS35L41.NTARM64.10.0...16299]
 %cs35l41.DeviceDesc% = cs35l41_Device, ACPI\CS35L41
 
 [cs35l41_Device.NT]
