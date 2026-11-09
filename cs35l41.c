@@ -1218,11 +1218,8 @@ StartCodec(
 	/* Required */
 	cs35l41_boost_config(pDevice, bst_ind, bst_cap, bst_ipk);
 
-	/* cirrus,asp-sdout-hiz
-	 * XiaoMi9 does not have a value configured for asp-sdout hiz, 
-	 * So it defaults to -1 according to downstream driver settings.
-	*/ 
-	INT32 dout_hiz = -1;
+	// cirrus,asp-sdout-hiz
+	INT32 dout_hiz = 3;
 
 	/* Optional */
 	if (dout_hiz <= CS35L41_ASP_DOUT_HIZ_MASK && dout_hiz >= 0)
